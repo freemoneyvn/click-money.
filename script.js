@@ -1,65 +1,64 @@
-// Kiểm tra và khởi tạo biến từ LocalStorage
-let points = localStorage.getItem("points") ? parseInt(localStorage.getItem("points")) : 0;
-let clicksLeft = localStorage.getItem("clicksLeft") ? parseInt(localStorage.getItem("clicksLeft")) : 10;
+// Lấy ngày hiện tại
+function getCurrentDate() {
+    let today = new Date();
+    return today.toISOString().split('T')[0]; // YYYY-MM-DD
+}
 
-// Chờ trang tải xong rồi mới gán sự kiện
+// Khởi tạo biến từ LocalStorage hoặc mặc định
+let points = localStorage.getItem("points") ? parseInt(localStorage.getItem("points")) : 0;
+let lastClaimDate = localStorage.getItem("lastClaimDate") || ""; // Ngày nhận lượt miễn phí
+let clicksLeft = localStorage.getItem("clicksLeft") ? parseInt(localStorage.getItem("clicksLeft")) : 0;
+
+// Nếu sang ngày mới, reset lượt miễn phí
+if (lastClaimDate !== getCurrentDate()) {
+    clicksLeft += 10; // Thêm 10 lượt miễn phí mỗi ngày
+    lastClaimDate = getCurrentDate();
+    localStorage.setItem("lastClaimDate", lastClaimDate);
+}
+
+// Chờ trang tải xong
 document.addEventListener("DOMContentLoaded", function () {
-    // Gán sự kiện cho các nút
     document.getElementById("clickButton").addEventListener("click", clickMoney);
     document.getElementById("watchAd").addEventListener("click", watchAd);
-    document.getElementById("doubleClicks").addEventListener("click", watchDoubleAd);
     document.getElementById("redeemCard").addEventListener("click", redeemCard);
-
-    // Cập nhật giao diện
     updateUI();
 });
 
-// Hàm xử lý click kiếm tiền
+// Hàm click nhận tiền
 function clickMoney() {
     if (clicksLeft > 0) {
-        points += 100; // Mỗi lần click nhận 100 điểm
-        clicksLeft--; // Giảm số lượt click
+        points += 50; // Mỗi lần click kiếm 50 đồng
+        clicksLeft--;
         updateUI();
     } else {
-        alert("Bạn đã hết lượt click, hãy xem quảng cáo để tiếp tục!");
+        alert("Hết lượt click! Hãy xem quảng cáo để nhận thêm.");
     }
 }
 
-// Hàm xem quảng cáo để nhận lại 10 lượt click
+// Hàm xem quảng cáo để nhận thêm 10 lượt click
 function watchAd() {
-    alert("Bạn đã xem quảng cáo! Lượt click được reset lại 10.");
-    clicksLeft = 10;
+    alert("Bạn đã xem quảng cáo! +10 lượt click.");
+    clicksLeft += 10;
     updateUI();
 }
 
-// Hàm xem 2 quảng cáo để nhân đôi lượt click lên 20
-function watchDoubleAd() {
-    alert("Bạn đã xem quảng cáo lần 1!");
-    alert("Bạn đã xem quảng cáo lần 2! Lượt click x2 thành 20.");
-    clicksLeft = 20;
-    updateUI();
-}
-
-// Hàm đổi điểm lấy thẻ cào 20k
+// Hàm đổi thẻ cào
 function redeemCard() {
     if (points >= 10000) {
         points -= 10000;
-        alert("Bạn đã đổi thẻ 20k thành công!");
+        alert("Bạn đã đổi thành công thẻ 20k!");
         updateUI();
     } else {
-        alert("Bạn không đủ điểm để đổi thẻ!");
+        alert("Bạn chưa đủ 10,000 đồng để đổi thẻ!");
     }
 }
 
-// Hàm cập nhật giao diện và lưu dữ liệu vào LocalStorage
+// Hàm cập nhật giao diện và lưu dữ liệu
 function updateUI() {
     document.getElementById("points").innerText = `Số điểm: ${points}`;
     document.getElementById("clicksLeft").innerText = `Lượt click còn lại: ${clicksLeft}`;
 
-    // Lưu vào LocalStorage để không bị mất khi tải lại trang
+    // Lưu dữ liệu vào LocalStorage
     localStorage.setItem("points", points);
     localStorage.setItem("clicksLeft", clicksLeft);
-
-    // Nếu hết lượt click thì disable nút
-    document.getElementById("clickButton").disabled = clicksLeft === 0;
 }
