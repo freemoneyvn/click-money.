@@ -3,29 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nhấp và Kiếm Tiền</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Click Nhận Tiền</title>
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Nhấp và Kiếm Tiền</h1>
-        <p id="points">Số điểm: 0</p>
-        <button id="clickButton">Click để nhận tiền</button>
-        <p id="clicksLeft">Lượt click còn lại: 10</p>
-        <button id="watchAd">Xem quảng cáo để tiếp tục</button>
-        <button id="doubleClicks">Xem 2 quảng cáo để x2 click</button>
-
-        <h2>Đổi Thẻ Cào</h2>
-        <button id="redeemCard">Đổi 10,000 điểm lấy thẻ 20k</button>
-
-        <h2>Liên Hệ</h2>
-        <a href="https://m.me/yourpage" target="_blank">Liên hệ qua Messenger</a>
-    </div>
-
-    <script src="script.js"></script>
+    <h1>Click để kiếm tiền</h1>
+    <p id="points">Số điểm: 0</p>
+    <p id="clicksLeft">Lượt click còn lại: 0</p>
+    
+    <button id="clickButton">Click Nhận Tiền</button>
+    <button id="watchAd">Xem Quảng Cáo (Nhận 10 Click)</button>
+    <button id="doubleClickCost">Xem 2 Quảng Cáo (Mỗi Click Trừ 2 Lượt)</button>
+    <button id="autoClick">Bật Auto Click (Xem QC)</button>
+    
+    <h2>Rút tiền</h2>
+    <p id="withdrawProgress">Quảng cáo đã xem để rút tiền: 0/5</p>
+    <button id="watchAdsForWithdraw">Xem Quảng Cáo Để Rút Tiền</button>
+    <button id="redeemCard" disabled>Rút Tiền (10,000 Điểm)</button>
 </body>
 </html>
-<button id="autoClick">Bật Auto Click (Xem QC)</button>
-<p id="withdrawProgress">Quảng cáo đã xem để rút tiền: 0/5</p>
-<button id="watchAdsForWithdraw">Xem quảng cáo để rút tiền</button>
-document.getElementById("watchAdsForWithdraw").addEventListener("click", watchAdsForWithdraw);
