@@ -10,6 +10,7 @@ let lastClaimDate = localStorage.getItem("lastClaimDate") || ""; // Ngày nhận
 let clicksLeft = localStorage.getItem("clicksLeft") ? parseInt(localStorage.getItem("clicksLeft")) : 0;
 let isDoubleCost = localStorage.getItem("isDoubleCost") === "true"; // Nếu true, mỗi click trừ 2 lượt
 let autoClickActive = false;
+let adWatchedForWithdraw = localStorage.getItem("adWatchedForWithdraw") ? parseInt(localStorage.getItem("adWatchedForWithdraw")) : 0;
 
 // Nếu sang ngày mới, reset lượt miễn phí
 if (lastClaimDate !== getCurrentDate()) {
@@ -76,11 +77,32 @@ function startAutoClick() {
     }, 30 * 60 * 1000); // Dừng sau 30 phút
 }
 
+// Hàm xem 5 lần quảng cáo để rút tiền
+function watchAdsForWithdraw() {
+    if (adWatchedForWithdraw < 5) {
+        adWatchedForWithdraw++;
+        localStorage.setItem("adWatchedForWithdraw", adWatchedForWithdraw);
+        alert(`Bạn đã xem ${adWatchedForWithdraw}/5 quảng cáo. Xem đủ 5 lần để rút tiền.`);
+    }
+
+    if (adWatchedForWithdraw >= 5) {
+        alert("Bạn đã đủ điều kiện rút tiền!");
+        document.getElementById("redeemCard").disabled = false;
+    }
+}
+
 // Hàm đổi thẻ cào
 function redeemCard() {
+    if (adWatchedForWithdraw < 5) {
+        alert("Bạn cần xem đủ 5 quảng cáo trước khi rút tiền!");
+        return;
+    }
+
     if (points >= 10000) {
         points -= 10000;
         alert("Bạn đã đổi thành công thẻ 20k!");
+        adWatchedForWithdraw = 0; // Reset số lần xem quảng cáo sau khi rút tiền
+        localStorage.setItem("adWatchedForWithdraw", adWatchedForWithdraw);
         updateUI();
     } else {
         alert("Bạn chưa đủ 10,000 điểm để đổi thẻ!");
@@ -91,6 +113,7 @@ function redeemCard() {
 function updateUI() {
     document.getElementById("points").innerText = `Số điểm: ${points}`;
     document.getElementById("clicksLeft").innerText = `Lượt click còn lại: ${clicksLeft}`;
+    document.getElementById("withdrawProgress").innerText = `Quảng cáo đã xem để rút tiền: ${adWatchedForWithdraw}/5`;
 
     // Lưu dữ liệu vào LocalStorage
     localStorage.setItem("points", points);
