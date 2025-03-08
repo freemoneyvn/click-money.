@@ -11,9 +11,6 @@
         <h1>Click Kiếm Tiền</h1>
     </header>
 
-    <!-- Khu vực quảng cáo -->
-    <div id="top-ad" class="ad-banner">[Quảng cáo trên cùng]</div>
-
     <main>
         <p>Điểm: <span id="points">0</span></p>
         <p>Click còn lại hôm nay: <span id="clicksLeft">200</span></p>
@@ -22,22 +19,16 @@
         <button onclick="watchAdForClicks()">Xem quảng cáo để nhận 10 click</button>
         <button onclick="enableAutoClick()">Xem quảng cáo để bật Auto Click</button>
         <button onclick="withdraw()">Rút tiền</button>
-
-        <!-- Quảng cáo giữa trang -->
-        <div id="middle-ad" class="ad-banner">[Quảng cáo giữa trang]</div>
-
         <button onclick="buyVIP()">Mua VIP</button>
         <button onclick="redeemCode()">Nhập mã</button>
 
-        <!-- Quảng cáo dưới cùng -->
-        <div id="bottom-ad" class="ad-banner">[Quảng cáo dưới cùng]</div>
+        <!-- Khu vực hiển thị quảng cáo -->
+        <div id="ad-container" class="ad-banner"></div>
     </main>
 
-    <!-- Thêm âm thanh -->
+    <!-- Âm thanh click -->
     <audio id="clickSound" src="audio/click.mp3"></audio>
 
     <script src="script.js"></script>
-    <script src="ads.js"></script>
-    <script src="vip.js"></script>
 </body>
 </html>
