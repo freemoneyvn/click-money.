@@ -25,7 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("watchAd").addEventListener("click", watchAd);
     document.getElementById("doubleClickCost").addEventListener("click", watchDoubleAd);
     document.getElementById("autoClick").addEventListener("click", startAutoClick);
+    document.getElementById("watchAdsForWithdraw").addEventListener("click", watchAdsForWithdraw);
     document.getElementById("redeemCard").addEventListener("click", redeemCard);
+    
     updateUI();
 });
 
