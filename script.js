@@ -2,11 +2,13 @@ let points = 0;
 let dailyClicks = 200;
 let adBonusClicks = 0;
 let autoClickActive = false;
+const clickSound = document.getElementById("clickSound");
 
 // Click để kiếm tiền
 function clickToEarn() {
     if (dailyClicks > 0 || adBonusClicks > 0) {
-        points += 5;
+        points += 10;
+        clickSound.play(); // Phát âm thanh
         document.getElementById("points").innerText = points;
 
         if (dailyClicks > 0) dailyClicks--;
@@ -29,15 +31,15 @@ function watchAdForClicks() {
     alert("Bạn đã nhận thêm 10 click!");
 }
 
-// Bật Auto Click (tối đa 1 giờ/ngày)
+// Bật Auto Click (tối đa 30 phút/ngày)
 function enableAutoClick() {
     showAd();
     if (!autoClickActive) {
         autoClickActive = true;
-        let autoClicks = 360;
+        let autoClicks = 180;
         let interval = setInterval(() => {
             if (autoClicks > 0) {
-                points += 5;
+                points += 10;
                 document.getElementById("points").innerText = points;
                 autoClicks--;
             } else {
