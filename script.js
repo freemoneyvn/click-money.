@@ -53,6 +53,27 @@ function enableAutoClick() {
 
 // Rút tiền (phải xem 5 quảng cáo trước)
 function withdraw() {
+    let options = {
+        "1": 10000,
+        "2": 20000,
+        "3": 50000,
+        "4": 100000
+    };
+
+    let choice = prompt("Chọn số tiền muốn rút:\n1. Thẻ 10K (10.000 điểm)\n2. Thẻ 20K (20.000 điểm)\n3. Thẻ 50K (50.000 điểm)\n4. Thẻ 100K (100.000 điểm)");
+
+    if (!options[choice]) {
+        alert("Lựa chọn không hợp lệ!");
+        return;
+    }
+
+    let pointsNeeded = options[choice];
+
+    if (points < pointsNeeded) {
+        alert("Bạn không đủ điểm để rút thẻ này!");
+        return;
+    }
+
     let adCount = 0;
     let interval = setInterval(() => {
         if (adCount < 5) {
@@ -60,13 +81,9 @@ function withdraw() {
             adCount++;
         } else {
             clearInterval(interval);
-            if (points >= 10000) {
-                alert("Bạn đã đổi được 10.000 đồng!");
-                points -= 10000;
-                document.getElementById("points").innerText = points;
-            } else {
-                alert("Bạn chưa đủ điểm.");
-            }
+            points -= pointsNeeded;
+            document.getElementById("points").innerText = points;
+            alert(`Bạn đã rút thành công thẻ ${pointsNeeded / 1000}K!`);
         }
     }, 5000);
 }
@@ -81,4 +98,12 @@ function redeemCode() {
     } else {
         alert("Mã không hợp lệ!");
     }
+}
+
+// Hiển thị quảng cáo
+function showAd() {
+    alert("Đang xem quảng cáo...");
+    setTimeout(() => {
+        alert("Quảng cáo hoàn tất!");
+    }, 5000);
 }
