@@ -1,0 +1,9 @@
+/click-kiem-tien
+│── index.html       (Giao diện web)
+│── script.js        (Logic xử lý)
+│── styles.css       (Giao diện)
+│── ads.js           (Quản lý quảng cáo)
+│── vip.js           (Xử lý gói VIP)
+│── assets/          (Thư mục chứa hình ảnh, icon, logo)
+│── ads/             (Thư mục chứa mã nhúng quảng cáo)
+│── payments/        (Xử lý thanh toán VIP & rút tiền)
