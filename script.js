@@ -99,3 +99,82 @@ document.addEventListener("DOMContentLoaded", function() {
 
     updateUI();
 });
+let points = 0;
+let dailyClicks = 200; // Giới hạn click miễn phí mỗi ngày
+let adBonusClicks = 0; // Click kiếm từ xem quảng cáo
+let autoClickActive = false;
+
+// Hàm click kiếm tiền
+function clickToEarn() {
+    if (dailyClicks > 0 || adBonusClicks > 0) {
+        points += 5;
+        document.getElementById("points").innerText = points;
+
+        if (dailyClicks > 0) dailyClicks--;
+        else if (adBonusClicks > 0) adBonusClicks--;
+
+        document.getElementById("clicksLeft").innerText = dailyClicks;
+
+        if ((dailyClicks + adBonusClicks) % 20 === 0) {
+            alert("Bạn phải xem quảng cáo để tiếp tục click!");
+            watchAd();
+        }
+    } else {
+        alert("Bạn đã hết lượt click! Hãy xem quảng cáo để nhận thêm.");
+    }
+}
+
+// Hàm xem quảng cáo để nhận thêm click
+function watchAdForClicks() {
+    watchAd();
+    adBonusClicks += 10;
+    alert("Bạn đã nhận thêm 10 click!");
+}
+
+// Hàm bật Auto Click
+function enableAutoClick() {
+    watchAd();
+    if (!autoClickActive) {
+        autoClickActive = true;
+        let autoClicks = 360;
+        let interval = setInterval(() => {
+            if (autoClicks > 0) {
+                points += 5;
+                document.getElementById("points").innerText = points;
+                autoClicks--;
+            } else {
+                clearInterval(interval);
+                autoClickActive = false;
+                alert("Auto click kết thúc! Xem quảng cáo để tiếp tục.");
+            }
+        }, 10000);
+    }
+}
+
+// Hàm xem quảng cáo
+function watchAd() {
+    alert("Đang xem quảng cáo...");
+    setTimeout(() => {
+        alert("Quảng cáo hoàn tất!");
+    }, 5000);
+}
+
+// Hàm rút tiền (phải xem 5 quảng cáo trước khi rút)
+function withdraw() {
+    let adCount = 0;
+    let interval = setInterval(() => {
+        if (adCount < 5) {
+            watchAd();
+            adCount++;
+        } else {
+            clearInterval(interval);
+            if (points >= 10000) {
+                alert("Bạn đã đổi được 10.000 đồng!");
+                points -= 10000;
+                document.getElementById("points").innerText = points;
+            } else {
+                alert("Bạn chưa đủ điểm để rút tiền.");
+            }
+        }
+    }, 5000);
+}
