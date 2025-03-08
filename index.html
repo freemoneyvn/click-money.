@@ -3,41 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Click để kiếm tiền</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Click Kiếm Tiền</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Click để kiếm tiền</h1>
+    <header>
+        <h1>Click Kiếm Tiền</h1>
+    </header>
 
-    <p>Số điểm: <span id="points">0</span></p>
-    <p>Lượt click còn lại: <span id="clicks">10</span></p>
-    <p>Gói VIP: <span id="vip-status">Không</span></p>
+    <!-- Khu vực quảng cáo dán -->
+    <div id="top-ad" class="ad-banner">[Quảng cáo trên cùng]</div>
 
-    <button id="click-btn">Click Nhận Tiền</button>
-    <button id="watch-ad-btn">Xem Quảng Cáo (Nhận 10 Click)</button>
-    <button id="auto-click-btn">Bật Auto Click (Xem QC)</button>
+    <main>
+        <p>Điểm: <span id="points">0</span></p>
+        <p>Click còn lại hôm nay: <span id="clicksLeft">200</span></p>
 
-    <h2>Gói VIP</h2>
-    <button id="vip-basic">Mua VIP Cơ Bản (100K)</button>
-    <button id="vip-premium">Mua VIP Cao Cấp (200K)</button>
-    <button id="vip-special">Mua VIP Đặc Biệt (500K)</button>
+        <button onclick="clickToEarn()">Click để nhận tiền</button>
+        <button onclick="watchAdForClicks()">Xem quảng cáo để nhận 10 click</button>
+        <button onclick="enableAutoClick()">Xem quảng cáo để bật Auto Click</button>
+        <button onclick="withdraw()">Rút tiền</button>
 
-    <h2>Rút tiền</h2>
-    <p>Quảng cáo đã xem để rút tiền: <span id="withdraw-ads">0</span>/5</p>
-    <button id="watch-ad-withdraw-btn">Xem Quảng Cáo Để Rút Tiền</button>
-    <button id="withdraw-btn" disabled>Rút Tiền (10,000 Điểm)</button>
+        <!-- Quảng cáo giữa trang -->
+        <div id="middle-ad" class="ad-banner">[Quảng cáo giữa trang]</div>
 
-    <h2>Nhập Code Khuyến Mãi</h2>
-    <input type="text" id="promo-code" placeholder="Nhập mã code">
-    <button id="redeem-code-btn">Nhận 10.000 Điểm</button>
+        <button onclick="buyVIP()">Mua VIP</button>
+        <button onclick="redeemCode()">Nhập mã</button>
 
-    <!-- Đặt script.js ở đây -->
+        <!-- Quảng cáo dưới cùng -->
+        <div id="bottom-ad" class="ad-banner">[Quảng cáo dưới cùng]</div>
+    </main>
+
     <script src="script.js"></script>
+    <script src="ads.js"></script>
+    <script src="vip.js"></script>
 </body>
 </html>
-<button onclick="clickToEarn()">Click để nhận tiền</button>
-<p>Điểm: <span id="points">0</span></p>
-<p>Click còn lại hôm nay: <span id="clicksLeft">200</span></p>
-<button onclick="watchAdForClicks()">Xem quảng cáo để nhận thêm 10 click</button>
-<button onclick="enableAutoClick()">Xem quảng cáo để bật Auto Click</button>
-<button onclick="withdraw()">Rút tiền</button>
