@@ -1,1 +1,33 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rút Tiền</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Rút Tiền</h1>
+        <p>Chọn mệnh giá thẻ cào:</p>
+        <button onclick="withdraw(10000)">Thẻ 10K</button>
+        <button onclick="withdraw(20000)">Thẻ 20K</button>
+        <button onclick="withdraw(50000)">Thẻ 50K</button>
+        <button onclick="withdraw(100000)">Thẻ 100K</button>
+        <p id="message"></p>
+        <a href="index.html">Quay lại</a>
+    </div>
+
+    <script>
+        function withdraw(amount) {
+            let balance = 10000; // Giả lập số tiền user có
+            if (balance >= amount) {
+                document.getElementById("message").innerText = `Bạn đã đổi thành công thẻ ${amount / 1000}K!`;
+            } else {
+                document.getElementById("message").innerText = "Bạn không đủ tiền để đổi thẻ này!";
+            }
+        }
+    </script>
+</body>
+</html>
 
